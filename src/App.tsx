@@ -1,24 +1,39 @@
 import { useState } from "react";
 import "./App.css";
 import Confetti from "react-confetti";
-import SweetAlert from "react-sweet-alert";
+import Swal from "sweetalert2";
 
 export default function Page() {
   const [noCount, setNoCount] = useState(0);
   const [yesPressed, setYesPressed] = useState(false);
   const yesButtonSize = noCount * 20 + 16;
+  const [noClicked, setNoClicked] = useState(false);
+
   const handleYesClick = () => {
-    SweetAlert({
-      title: "So quick to say yes?",
-      text: "There's a little surprise if you click 'No'... just saying! Want to see what it is before deciding?",
-      icon: "info",
-      buttons: ["No, I'm sure!", "Yes, show me!"],
-    }).then((isCurious) => {
-      if (!isCurious) {
-        setYesPressed(true);
-      }
-    });
+    // If "No" has been clicked, go straight to the "teehee" page.
+    if (noClicked) {
+      setYesPressed(true);
+    } else {
+      // Show the sweet alert to suggest clicking "No" for a surprise
+      Swal.fire({
+        title: "So quick to say yes?",
+        text: "abbbaaaa you must really want me that bad ( ͡° ͜ʖ ͡°)",
+        showCancelButton: true,
+        confirmButtonText: "oookay oookay calm down now mr swamy",
+        cancelButtonText:
+          "nooo im sureee i'm head over heels for you i wouldn't ever say no",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // If "Yes, show me!" is clicked
+          Swal.fire("hmmm i wonder what else you can say");
+        } else {
+          // If "No, I'm sure!" is clicked
+          setYesPressed(true);
+        }
+      });
+    }
   };
+
   const backgroundStyle = {
     transition: "background-color 1s ease",
     backgroundColor: yesPressed
@@ -28,6 +43,7 @@ export default function Page() {
 
   const handleNoClick = () => {
     setNoCount(noCount + 1);
+    setNoClicked(true); // Record that "No" has been clicked.
   };
 
   const getNoButtonText = () => {
@@ -36,6 +52,7 @@ export default function Page() {
       "are you SURE",
       "nila PLS",
       "pretty pleaseee",
+      "i was playing pls just say yes",
       "why must you do this to me",
       "i'm gonna cry :((((",
       "say YES >:( ",
