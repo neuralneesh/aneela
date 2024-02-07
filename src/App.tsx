@@ -8,7 +8,7 @@ export default function Page() {
   const [yesPressed, setYesPressed] = useState(false);
   const yesButtonSize = noCount * 20 + 16;
   const handleYesClick = () => {
-    swal({
+    SweetAlert({
       title: "So quick to say yes?",
       text: "There's a little surprise if you click 'No'... just saying! Want to see what it is before deciding?",
       icon: "info",
