@@ -1,10 +1,30 @@
 import { useState } from "react";
 import "./App.css";
+import Confetti from "react-confetti";
+import SweetAlert from "react-sweet-alert";
 
 export default function Page() {
   const [noCount, setNoCount] = useState(0);
   const [yesPressed, setYesPressed] = useState(false);
   const yesButtonSize = noCount * 20 + 16;
+  const handleYesClick = () => {
+    swal({
+      title: "So quick to say yes?",
+      text: "There's a little surprise if you click 'No'... just saying! Want to see what it is before deciding?",
+      icon: "info",
+      buttons: ["No, I'm sure!", "Yes, show me!"],
+    }).then((isCurious) => {
+      if (!isCurious) {
+        setYesPressed(true);
+      }
+    });
+  };
+  const backgroundStyle = {
+    transition: "background-color 1s ease",
+    backgroundColor: yesPressed
+      ? "#ffcccb"
+      : `rgba(255, ${255 - noCount * 20}, ${255 - noCount * 20})`,
+  };
 
   const handleNoClick = () => {
     setNoCount(noCount + 1);
@@ -13,20 +33,18 @@ export default function Page() {
   const getNoButtonText = () => {
     const phrases = [
       "No",
-      "Are you sure?",
-      "Really sure?",
-      "Think again!",
-      "Last chance!",
-      "Surely not?",
+      "are you SURE",
+      "nila PLS",
+      "pretty pleaseee",
+      "why must you do this to me",
+      "i'm gonna cry :((((",
+      "say YES >:( ",
       "You might regret this!",
       "Give it another thought!",
-      "Are you absolutely certain?",
       "This could be a mistake!",
       "Have a heart!",
       "Don't be so cold!",
-      "Change of heart?",
       "Wouldn't you reconsider?",
-      "Is that your final answer?",
       "You're breaking my heart ;(",
     ];
 
@@ -34,12 +52,13 @@ export default function Page() {
   };
 
   return (
-    <div className="centered-container">
+    <div style={backgroundStyle} className="centered-container">
       <div className="valentine-container">
         {yesPressed ? (
           <>
             <img src="https://media1.tenor.com/m/gRnRdgBucm8AAAAC/puuung-kiss-puuung.gif" />
-            <div className="text-container">teeeheeee okayyyy</div>
+            <div className="text-container">teeeheeee yayyyy</div>
+            <Confetti />
           </>
         ) : (
           <>
@@ -54,7 +73,7 @@ export default function Page() {
               <button
                 className={"yes-button"}
                 style={{ fontSize: yesButtonSize }}
-                onClick={() => setYesPressed(true)}
+                onClick={handleYesClick} // Updated to use the new handler
               >
                 Yes
               </button>
