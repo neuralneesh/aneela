@@ -33,12 +33,14 @@ export default function Page() {
       });
     }
   };
-
+  const [backgroundColor] = useState("#f0e2ce"); // set initial backgroun
   const backgroundStyle = {
     transition: "background-color 1s ease",
     backgroundColor: yesPressed
       ? "#ffcccb"
-      : `rgba(255, ${255 - noCount * 20}, ${255 - noCount * 20})`,
+      : noCount > 0
+        ? `rgba(255, ${255 - noCount * 20}, ${255 - noCount * 20})`
+        : backgroundColor, // use the state for the initial color
   };
 
   const handleNoClick = () => {
