@@ -33,7 +33,7 @@ export default function Page() {
       });
     }
   };
-  const [backgroundColor] = useState("#f0e2ce"); // set initial backgroun
+  const [backgroundColor] = useState("#e0def3"); // set initial backgroun
   const backgroundStyle = {
     transition: "background-color 1s ease",
     backgroundColor: yesPressed
