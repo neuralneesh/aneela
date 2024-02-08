@@ -75,6 +75,7 @@ export default function Page() {
           <>
             <img src="https://media1.tenor.com/m/gRnRdgBucm8AAAAC/puuung-kiss-puuung.gif" />
             <div className="text-container">teeeheeee yayyyy</div>
+            <div className="text-container2">i'm the happiest man aliveeee</div>
             <Confetti />
           </>
         ) : (
